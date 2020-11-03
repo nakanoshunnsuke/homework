@@ -1,12 +1,12 @@
 @extends('layout')
-@section('title', '課題内容編集')
+@section('title', '授業編集')
 @section('content')
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
-        <h2>ブログ編集フォーム</h2>
-        <form method="POST" action="{{ route('blog.update') }}" onSubmit="return checkSubmit()">
+        <h2>授業編集フォーム</h2>
+        <form method="POST" action="{{ route('tag.update') }}" onSubmit="return checkSubmit()">
         @csrf
-            <input type="hidden" name="id" value="{{$blog->id}}">
+            <input type="hidden" name="id" value="{{$tag->id}}">
             <div class="form-group">
                 <label for="title">
                     タイトル
@@ -15,7 +15,7 @@
                     id="title"
                     name="title"
                     class="form-control"
-                    value="{{$blog->title}}"
+                    value="{{$tag->title}}"
                     type="text"
                 >
                 @if ($errors->has('title'))
@@ -26,14 +26,14 @@
             </div>
             <div class="form-group">
                 <label for="content">
-                    本文
+                    授業内容
                 </label>
                 <textarea
                     id="content"
                     name="content"
                     class="form-control"
                     rows="4"
-                >{{ $blog->content }}</textarea>
+                >{{ $tag->content }}</textarea>
                 @if ($errors->has('content'))
                     <div class="text-danger">
                         {{ $errors->first('content') }}
@@ -41,7 +41,7 @@
                 @endif
             </div>
             <div class="mt-5">
-                <a class="btn btn-secondary" href="{{ route('blogs') }}">
+                <a class="btn btn-secondary" href="{{ route('tags') }}">
                     キャンセル
                 </a>
                 <button type="submit" class="btn btn-primary">

@@ -1,12 +1,11 @@
 @extends('layout')
-@section('title', '課題内容編集')
+@section('title', '授業登録')
 @section('content')
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
-        <h2>ブログ編集フォーム</h2>
-        <form method="POST" action="{{ route('blog.update') }}" onSubmit="return checkSubmit()">
+        <h2>授業登録フォーム</h2>
+        <form method="POST" action="{{ route('tag.store') }}" onSubmit="return checkSubmit()">
         @csrf
-            <input type="hidden" name="id" value="{{$blog->id}}">
             <div class="form-group">
                 <label for="title">
                     タイトル
@@ -15,7 +14,7 @@
                     id="title"
                     name="title"
                     class="form-control"
-                    value="{{$blog->title}}"
+                    value="{{ old('title') }}"
                     type="text"
                 >
                 @if ($errors->has('title'))
@@ -26,14 +25,14 @@
             </div>
             <div class="form-group">
                 <label for="content">
-                    本文
+                    評価基準
                 </label>
                 <textarea
                     id="content"
                     name="content"
                     class="form-control"
                     rows="4"
-                >{{ $blog->content }}</textarea>
+                >{{ old('content') }}</textarea>
                 @if ($errors->has('content'))
                     <div class="text-danger">
                         {{ $errors->first('content') }}
@@ -41,11 +40,11 @@
                 @endif
             </div>
             <div class="mt-5">
-                <a class="btn btn-secondary" href="{{ route('blogs') }}">
+                <a class="btn btn-secondary" href="{{ route('tags') }}">
                     キャンセル
                 </a>
                 <button type="submit" class="btn btn-primary">
-                    更新する
+                    追加する
                 </button>
             </div>
         </form>
@@ -53,7 +52,7 @@
 </div>
 <script>
 function checkSubmit(){
-if(window.confirm('更新してよろしいですか？')){
+if(window.confirm('送信してよろしいですか？')){
     return true;
 } else {
     return false;
